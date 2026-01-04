@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <style>
+        .ui-overlay { position: fixed; top: 20px; left: 20px; color: white; font-family: sans-serif; z-index: 100; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); }
+        .status-dot { height: 10px; width: 10px; background-color: #00ff00; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <div class="ui-overlay">
+        <div><span class="status-dot"></span> AR 疗愈模式：<span id="emotion">检测中...</span></div>
+        <div style="font-size: 24px; font-weight: bold; margin-top: 10px;">压力值: <span id="stress">45</span>%</div>
+        <div style="font-size: 12px; margin-top: 5px;">AI 正在生成：森林冥想场景...</div>
+    </div>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <a-entity particle-system="preset: dust; color: #88ffcc; particleCount: 2000"></a-entity>
+        <a-sky color="#87CEEB" opacity="0.3"></a-sky>
+    </a-scene>
+    <script>
+        // 模拟情绪波动算法
+        setInterval(() => {
+            const emotions = ["平静", "焦虑", "疲惫", "愉悦"];
+            document.getElementById('emotion').innerText = emotions[Math.floor(Math.random() * emotions.length)];
+            document.getElementById('stress').innerText = Math.floor(Math.random() * (60 - 30) + 30);
+        }, 3000);
+    </script>
+</body>
+</html>
